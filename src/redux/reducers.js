@@ -1,29 +1,39 @@
-const { SET_LOADING, SET_LOADED, SET_DATA } = require("./action");
+import { combineReducers } from "redux";
+const { SET_LOADING, SET_LOADED, SET_DATA, ADD_MOVIE } = require("./action");
 
-const defaultState = {
-    loading: false,
-    results: [],
-}
 
-export const searchReducer = (state=defaultState, action) => {
+const searchReducer = (state=[], action) => {
     switch (action.type) {
-        case SET_LOADING:
-            return {
-                ...state,
-                loading: true
-            }
-        case SET_LOADED: 
-            return {
-                ...state,
-                loading: false
-            }
         case SET_DATA:
-            return {
-                ...state,
-                results: action.payload.moviesArray,
-                loading: false,
-            }
+            return action.payload.moviesArray
         default:
             return state;
     }
 }
+
+const loadingReducer = (state=false, action) => {
+    switch (action.type){
+        case SET_LOADING:
+            return true
+        case SET_LOADED: 
+            return false
+        default: 
+            return state
+    }
+}
+
+const favoritesReducer = (state=[], action) => {
+    switch(action.type){
+        case ADD_MOVIE:
+            return state.concat(action.payload.newMovie)
+        default: 
+            return state;
+    }
+}
+
+//! Combine multiple reducers using the combineReducers function
+export const rootReducer = combineReducers({
+  loading: loadingReducer,
+  results: searchReducer,
+  favorites: favoritesReducer,
+})

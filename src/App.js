@@ -3,7 +3,7 @@ import './App.css';
 import { Button, Container, Typography, Grid, Box, Paper, InputBase } from '@material-ui/core';
 import MovieCard from './components/MovieCard';
 import { useState } from 'react';
-import {setData} from './redux/action'
+import {setData, loading, loaded} from './redux/action'
 import {useSelector, useDispatch} from 'react-redux';
 
 function App() {
@@ -13,11 +13,13 @@ function App() {
 
   const handleSearch = (e) => {
     e.preventDefault();
+    dispatch(loading())
 
     fetch(`http://www.omdbapi.com/?apikey=59354c85&s=${encodeURIComponent(search)}`)
       .then((res) => res.json())
       .then(data => {
         dispatch(setData(data.Search))
+        dispatch(loaded())
       })
       .catch(e=> console.log(e))
   }

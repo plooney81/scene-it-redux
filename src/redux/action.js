@@ -1,6 +1,7 @@
 export const SET_DATA = 'SET_DATA';
 export const SET_LOADING = 'SET_LOADING';
 export const SET_LOADED = 'SET_LOADED';
+export const ADD_MOVIE = 'ADD_MOVIE';
 
 export const loading = () => {
     return {
@@ -19,6 +20,15 @@ export const setData = (moviesArray) => {
         type: SET_DATA,
         payload: {
             moviesArray
+        }
+    }
+}
+
+export const addMovie = (newMovie) => {
+    return {
+        type: ADD_MOVIE,
+        payload: {
+            newMovie
         }
     }
 }
