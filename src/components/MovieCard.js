@@ -1,6 +1,6 @@
 import { Card, CardActionArea, CardActions, CardContent, CardMedia, IconButton, Typography } from '@material-ui/core'
 import React from 'react';
-import './MovieCard.css';
+// import './MovieCard.css';
 import AddIcon from '@material-ui/icons/Add';
 
 
@@ -17,7 +17,7 @@ export default function MovieCard({movie}) {
                 />
                 <CardContent>
                     <Typography variant="h5">{movie.Title}</Typography>
-                    <Typography style={{color: '#fff'}}variant="body2" color="textSecondary" component="p">{movie.Year}</Typography>
+                    <Typography variant="body2" color="textSecondary" component="p">{movie.Year}</Typography>
                 </CardContent>
             </CardActionArea>
             <CardActions>

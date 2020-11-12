@@ -5,7 +5,7 @@
 - [Lessons Learned](#lessons-learned)
   
 ## About this repository
-* This repository was built using 
+* The goal of the Scene It - Redux exercise was to further re-enforce newfound React-Redux concepts.
 
 ## **General**
 The Scene It - Redux app was built using the following technologies/frameworks/libraries:
