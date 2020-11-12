@@ -1,4 +1,15 @@
-import {createStore} from 'redux';
+import {applyMiddleware, compose, createStore} from 'redux';
+import { load, save } from 'redux-localstorage-simple';
 import {rootReducer} from './reducers';
 
-export const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION__COMPOSE || compose;
+
+const middleware = composeEnhancers(applyMiddleware(
+    save()
+))
+
+export const store = createStore(
+    rootReducer,
+    load(),
+    middleware
+)

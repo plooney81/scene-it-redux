@@ -2,16 +2,19 @@ import { Card, CardActionArea, CardActions, CardContent, CardMedia, IconButton, 
 import React from 'react';
 // import './MovieCard.css';
 import AddIcon from '@material-ui/icons/Add';
-import {useDispatch} from 'react-redux';
-import { addMovie } from '../redux/action';
+import SubtractIcon from '@material-ui/icons/Delete';
+import {useDispatch, useSelector} from 'react-redux';
+import { addMovie, deleteMovie } from '../redux/action';
 
 
 
 export default function MovieCard({movie}) {
     const dispatch = useDispatch();
-    const handleAddMovie = () => {
-        dispatch(addMovie(movie))
-    }
+    const movies = useSelector(state => state.favorites)
+    const handleAddMovie = () => dispatch(addMovie(movie))
+    const handleDeleteMovie = () => dispatch(deleteMovie(movie.imdbID))
+    const found = movies.find(movieElem => movieElem.imdbID === movie.imdbID)
+
     return (
         <Card className="movie-card" style={{height: '100%'}}>
             <CardActionArea >
@@ -26,10 +29,18 @@ export default function MovieCard({movie}) {
                 </CardContent>
             </CardActionArea>
             <CardActions>
-                    <IconButton size="small" color="primary" onClick={handleAddMovie}>
-                        <AddIcon></AddIcon>
-                    </IconButton>
-                    <p>Add Movie</p>
+                {found ? 
+                (
+                <IconButton size="small" color="primary" onClick={handleDeleteMovie}>
+                    <SubtractIcon />
+                </IconButton>
+                
+                ): (
+                <IconButton size="small" color="primary" onClick={handleAddMovie}>
+                    <AddIcon />
+                </IconButton>
+                    
+                )}
             </CardActions>
         </Card>
     )

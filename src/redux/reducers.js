@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-const { SET_LOADING, SET_LOADED, SET_DATA, ADD_MOVIE } = require("./action");
+const { SET_LOADING, SET_LOADED, SET_DATA, ADD_MOVIE, DELETE_MOVIE } = require("./action");
 
 
 const searchReducer = (state=[], action) => {
@@ -26,6 +26,8 @@ const favoritesReducer = (state=[], action) => {
     switch(action.type){
         case ADD_MOVIE:
             return state.concat(action.payload.newMovie)
+        case DELETE_MOVIE:
+            return state.filter(favorite => favorite.imdbID !== action.payload.imdbID)
         default: 
             return state;
     }
